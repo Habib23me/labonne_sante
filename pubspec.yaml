@@ -1,0 +1,17 @@
+name: labonne_sante
+description: "An ecommerce app for pharmatacy products called la bonne sante"
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
