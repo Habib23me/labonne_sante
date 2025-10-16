@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:labonne_sante/features/products/presentation/notifiers/product_notifier.dart';
+import 'package:labonne_sante/features/products/presentation/pages/product_detail_page.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -53,12 +54,20 @@ class HomePage extends ConsumerWidget {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: data.length,
-                itemBuilder: (context, index) => Column(
-                  children: [
-                    Image.network(data[index].media.first, height: 100),
-                    Text(data[index].name),
-                    Text(data[index].price.toString()),
-                  ],
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ProductDetailPage(productId: data[index].id),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Image.network(data[index].media.first, height: 100),
+                      Text(data[index].name),
+                      Text(data[index].price.toString()),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -72,12 +81,20 @@ class HomePage extends ConsumerWidget {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: data.length,
-                itemBuilder: (context, index) => Column(
-                  children: [
-                    Image.network(data[index].media.first, height: 100),
-                    Text(data[index].name),
-                    Text(data[index].price.toString()),
-                  ],
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ProductDetailPage(productId: data[index].id),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Image.network(data[index].media.first, height: 100),
+                      Text(data[index].name),
+                      Text(data[index].price.toString()),
+                    ],
+                  ),
                 ),
               ),
             ),
