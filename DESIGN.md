@@ -57,8 +57,7 @@ lib/
 │   │   │   └── repositories/
 │   │   ├── domain/
 │   │   │   ├── entities/
-│   │   │   ├── repositories/
-│   │   │   └── usecases/
+│   │   │   └──repositories/
 │   │   └── presentation/
 │   │       ├── notifiers/
 │   │       ├── pages/
@@ -107,7 +106,7 @@ The domain layer will contain the core business logic and entities.
 
 *   **Entities:** Plain Dart objects representing the core business models (e.g., `Product`, `Category`).
 *   **Repositories:** Abstract interfaces for the data layer to implement (e.g., `ProductRepository`).
-*   **Usecases:** Classes that encapsulate a single business operation (e.g., `GetProducts`, `GetProductDetails`).
+
 
 ### 4.4. Presentation Layer
 
