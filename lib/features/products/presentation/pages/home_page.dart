@@ -24,6 +24,7 @@ class HomePage extends ConsumerWidget {
     final categories = ref.watch(categoriesProvider);
 
     final l10n = context.l10n;
+    final height = products.isLoading ? kToolbarHeight : 12.0;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: GlassAppBar(
@@ -40,17 +41,24 @@ class HomePage extends ConsumerWidget {
           ),
         ],
       ),
-      body: RefreshIndicator(
-        onRefresh: ref.read(productsProvider.notifier).getProducts,
+      body: RefreshIndicator.adaptive(
+        displacement: kToolbarHeight * 2.2,
+        onRefresh: () async {
+          await Future.wait([
+            ref.refresh(bannersProvider.future),
+            ref.refresh(categoriesProvider.future),
+            ref.read(productsProvider.notifier).getProducts(forceRefresh: true),
+          ]);
+        },
         child: ListView(
           children: [
-            const SizedBox(height: 12),
+            SizedBox(height: height),
             banners.when(
               data: (data) => HomeCarousel(banners: data),
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (error, stack) => SectionErrorPlaceholder(
-                title: l10n.appTitle,
-                message: 'We couldn\'t load banners.',
+                title: l10n.somethingWentWrong,
+                message: l10n.bannersErrorMessage,
                 onRetry: () => ref.refresh(bannersProvider.future),
                 height: 272,
               ),
@@ -60,8 +68,8 @@ class HomePage extends ConsumerWidget {
               data: (data) => CategoryStrip(categories: data),
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (error, stack) => SectionErrorPlaceholder(
-                title: 'Categories',
-                message: 'We couldn\'t load categories.',
+                title: l10n.categoriesTitle,
+                message: l10n.categoriesErrorMessage,
                 height: 160,
                 onRetry: () => ref.refresh(categoriesProvider.future),
               ),
@@ -92,8 +100,8 @@ class HomePage extends ConsumerWidget {
               loading: () =>
                   const ProductHorizontalList(products: [], isLoading: true),
               error: (error, stack) => SectionErrorPlaceholder(
-                title: 'Special Offers',
-                message: 'We couldn\'t load products.',
+                title: l10n.specialOffersTitle,
+                message: l10n.productsErrorMessage,
                 height: 390,
                 onRetry: () =>
                     ref.read(productsProvider.notifier).getProducts(),
@@ -127,8 +135,8 @@ class HomePage extends ConsumerWidget {
               loading: () =>
                   const ProductHorizontalList(products: [], isLoading: true),
               error: (error, stack) => SectionErrorPlaceholder(
-                title: 'Trending Now',
-                message: 'We couldn\'t load products.',
+                title: l10n.trendingNowTitle,
+                message: l10n.productsErrorMessage,
                 height: 390,
                 onRetry: () =>
                     ref.read(productsProvider.notifier).getProducts(),

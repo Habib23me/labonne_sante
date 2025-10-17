@@ -92,7 +92,12 @@ class ProductDetailPage extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(data.name, style: textTheme.headlineSmall),
+                  Text(
+                    data.name,
+                    style: textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   Text(
                     data.categories.isNotEmpty ? data.categories.first : '',
                     style: textTheme.bodySmall?.copyWith(

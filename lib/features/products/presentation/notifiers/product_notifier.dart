@@ -35,10 +35,12 @@ class ProductNotifier extends StateNotifier<AsyncValue<List<domain.Product>>> {
     getProducts();
   }
 
-  Future<void> getProducts() async {
+  Future<void> getProducts({bool forceRefresh = false}) async {
     try {
       state = const AsyncValue.loading();
-      final products = await productRepository.getProducts();
+      final products = await productRepository.getProducts(
+        forceRefresh: forceRefresh,
+      );
       state = AsyncValue.data(products);
     } catch (e, s) {
       state = AsyncValue.error(e, s);

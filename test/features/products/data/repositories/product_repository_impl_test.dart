@@ -48,7 +48,7 @@ void main() {
 
   group('getProducts', () {
     test(
-      'should return remote data when the call to remote data source is successful',
+      'should have cache first behavior and refresh from network for next load',
       () async {
         // arrange
         // cache-first path calls local first; return empty to force remote fetch
@@ -61,6 +61,7 @@ void main() {
         // act
         final result = await repository.getProducts();
         // assert
+        mockito.verify(mockLocalDataSource.getProducts());
         mockito.verify(mockRemoteDataSource.getProducts());
         expect(result.length, equals(tProductModelList.length));
       },
@@ -88,20 +89,38 @@ void main() {
     );
 
     test(
-      'should return local data when the call to remote data source is unsuccessful',
+      'should throw when remote fails and no local cache (forceRefresh: true)',
       () async {
         // arrange
-        mockito.when(mockRemoteDataSource.getProducts()).thenThrow(Exception());
         mockito
             .when(mockLocalDataSource.getProducts())
             .thenAnswer((_) async => []);
-        // act
-        final result = await repository.getProducts();
-        // assert
+        mockito
+            .when(mockRemoteDataSource.getProducts())
+            .thenThrow(Exception('network error'));
+        // act + assert
+        await expectLater(
+          repository.getProducts(forceRefresh: true),
+          throwsA(isA<Exception>()),
+        );
         mockito.verify(mockRemoteDataSource.getProducts());
-        mockito.verify(mockLocalDataSource.getProducts());
-        expect(result, equals([]));
+        mockito.verifyNoMoreInteractions(mockRemoteDataSource);
       },
     );
+    test('should return remote data when forceRefresh is true', () async {
+      // arrange
+      mockito
+          .when(mockLocalDataSource.getProducts())
+          .thenAnswer((_) async => []);
+      mockito
+          .when(mockRemoteDataSource.getProducts())
+          .thenAnswer((_) async => tProductModelList);
+      // act
+      final result = await repository.getProducts(forceRefresh: true);
+      // assert
+      mockito.verify(mockRemoteDataSource.getProducts());
+      mockito.verifyNever(mockLocalDataSource.getProducts());
+      expect(result.length, equals(tProductModelList.length));
+    });
   });
 }

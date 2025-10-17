@@ -114,9 +114,9 @@ The domain layer will contain the core business logic and entities.
 The presentation layer will be built with Flutter and will use Riverpod for state management.
 
 *   **Home Page:**
-    *   Displays a promotional banner.
+    *   Displays a promotional banner carousel.
     *   Displays a list of product categories.
-    *   Displays two sections of products: "New Arrivals" and "Special Offers".
+    *   Displays two sections of products: "Trending Now" and "Special Offers".
     *   Each product will have a name, image, and price.
     *   Tapping on a product will navigate to the product detail page.
 *   **Product Detail Page:**
@@ -141,5 +141,24 @@ The offline-first strategy will be implemented as follows:
 3.  **Network Request:** In the background, the repository will make a network request to fetch the latest data from the API.
 4.  **Cache Update:** If the network request is successful, the local database will be updated with the new data.
 5.  **UI Refresh:** The UI will automatically refresh to display the latest data from the database.
+
+### 4.7. Internationalization (i18n)
+
+The app uses Flutter's gen-l10n for localization. Strings are defined in `lib/l10n/app_en.arb` and exposed via `AppLocalizations` with a `BuildContext` extension `context.l10n`.
+
+- Error placeholders and actions are localized:
+  - **Retry**: `retry`
+  - **Banners error**: `bannersErrorMessage`
+  - **Categories title**: `categoriesTitle`
+  - **Categories error**: `categoriesErrorMessage`
+  - **Products error**: `productsErrorMessage`
+
+### 4.8. Error Handling UX
+
+Each section shows a friendly, consistent placeholder on error using `SectionErrorPlaceholder` with optional retry:
+
+- Banners: title `appTitle`, message `bannersErrorMessage`, retry refreshes `bannersProvider`.
+- Categories: title `categoriesTitle`, message `categoriesErrorMessage`, retry refreshes `categoriesProvider`.
+- Special Offers and Trending Now: title `specialOffersTitle`/`trendingNowTitle`, message `productsErrorMessage`, retry triggers `getProducts()`.
 
 If the network request fails, the app will continue to function with the cached data.

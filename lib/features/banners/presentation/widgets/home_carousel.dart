@@ -72,7 +72,7 @@ class _HomeCarouselState extends State<HomeCarousel> {
                             ),
                             child: Text(
                               l10n.carouselCtaShopNow,
-                              style: Theme.of(context).textTheme.labelLarge,
+                              style: Theme.of(context).textTheme.labelMedium,
                             ),
                           ),
                         ),

@@ -93,7 +93,7 @@ class ProductCard extends StatelessWidget {
 
             ///Hardcoding currency for now for the sake of simplicity
             Text(
-              '${product.price.toStringAsFixed(0)} AED',
+              '${product.price.toStringAsFixed(2)} AED',
               style: textTheme.titleMedium,
             ),
           ],

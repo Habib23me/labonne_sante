@@ -100,9 +100,10 @@ class CategoryStrip extends StatelessWidget {
                           child: BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
                             child: Container(
-                              width: 48,
-                              height: 48,
-                              color: Color.fromARGB(255, 251, 250, 250),
+                              width: 55,
+                              height: 55,
+                              padding: const EdgeInsets.all(8),
+                              // color: Color.fromARGB(255, 246, 244, 244),
                               alignment: Alignment.center,
                               child: _CategoryIcon(iconPath: cat.icon),
                             ),
@@ -148,6 +149,6 @@ class _CategoryIcon extends StatelessWidget {
     if (_isNetwork) {
       return CachedNetworkImage(imageUrl: iconPath, fit: BoxFit.contain);
     }
-    return Image.asset(iconPath, fit: BoxFit.cover, width: 30, height: 30);
+    return Image.asset(iconPath, fit: BoxFit.contain);
   }
 }

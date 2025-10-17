@@ -5,13 +5,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:labonne_sante/core/db/app_database.dart' as _i8;
-import 'package:labonne_sante/features/banners/data/models/banner_model.dart'
-    as _i5;
-import 'package:labonne_sante/features/categories/data/models/category_model.dart'
-    as _i6;
+import 'package:labonne_sante/core/db/app_database.dart' as _i6;
 import 'package:labonne_sante/features/products/data/datasources/product_local_data_source.dart'
-    as _i7;
+    as _i5;
 import 'package:labonne_sante/features/products/data/datasources/product_remote_data_source.dart'
     as _i3;
 import 'package:labonne_sante/features/products/data/models/product_model.dart'
@@ -68,39 +64,19 @@ class MockProductRemoteDataSource extends _i1.Mock
             ),
           )
           as _i4.Future<_i2.ProductModel>);
-
-  @override
-  _i4.Future<List<_i5.BannerModel>> getBanners() =>
-      (super.noSuchMethod(
-            Invocation.method(#getBanners, []),
-            returnValue: _i4.Future<List<_i5.BannerModel>>.value(
-              <_i5.BannerModel>[],
-            ),
-          )
-          as _i4.Future<List<_i5.BannerModel>>);
-
-  @override
-  _i4.Future<List<_i6.CategoryModel>> getCategories() =>
-      (super.noSuchMethod(
-            Invocation.method(#getCategories, []),
-            returnValue: _i4.Future<List<_i6.CategoryModel>>.value(
-              <_i6.CategoryModel>[],
-            ),
-          )
-          as _i4.Future<List<_i6.CategoryModel>>);
 }
 
 /// A class which mocks [ProductLocalDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockProductLocalDataSource extends _i1.Mock
-    implements _i7.ProductLocalDataSource {
+    implements _i5.ProductLocalDataSource {
   MockProductLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<void> cacheProducts({required List<_i8.Product>? products}) =>
+  _i4.Future<void> cacheProducts({required List<_i6.Product>? products}) =>
       (super.noSuchMethod(
             Invocation.method(#cacheProducts, [], {#products: products}),
             returnValue: _i4.Future<void>.value(),
@@ -109,10 +85,10 @@ class MockProductLocalDataSource extends _i1.Mock
           as _i4.Future<void>);
 
   @override
-  _i4.Future<List<_i8.Product>> getProducts() =>
+  _i4.Future<List<_i6.Product>> getProducts() =>
       (super.noSuchMethod(
             Invocation.method(#getProducts, []),
-            returnValue: _i4.Future<List<_i8.Product>>.value(<_i8.Product>[]),
+            returnValue: _i4.Future<List<_i6.Product>>.value(<_i6.Product>[]),
           )
-          as _i4.Future<List<_i8.Product>>);
+          as _i4.Future<List<_i6.Product>>);
 }

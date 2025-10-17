@@ -24,22 +24,20 @@ class ProductRepositoryImpl implements ProductRepository {
   // if network failed and no cache available: return empty list
 
   @override
-  Future<List<Product>> getProducts() async {
-    final localProducts = await localDataSource.getProducts();
-    if (localProducts.isNotEmpty) {
-      _refreshFromNetwork();
-      return localProducts.map((e) => _fromDb(e)).toList();
+  Future<List<Product>> getProducts({bool forceRefresh = false}) async {
+    if (!forceRefresh) {
+      final localProducts = await localDataSource.getProducts();
+      if (localProducts.isNotEmpty) {
+        _refreshFromNetwork();
+        return localProducts.map((e) => _fromDb(e)).toList();
+      }
     }
 
-    try {
-      final remoteProducts = await remoteDataSource.getProducts();
-      await localDataSource.cacheProducts(
-        products: remoteProducts.map((e) => _toDb(e)).toList(),
-      );
-      return remoteProducts.map((e) => _fromModel(e)).toList();
-    } catch (e) {
-      return [];
-    }
+    final remoteProducts = await remoteDataSource.getProducts();
+    await localDataSource.cacheProducts(
+      products: remoteProducts.map((e) => _toDb(e)).toList(),
+    );
+    return remoteProducts.map((e) => _fromModel(e)).toList();
   }
 
   // Background refresh method

@@ -24,7 +24,7 @@ class SectionErrorPlaceholder extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.error_outline, color: colorScheme.error, size: 28),
+          Icon(Icons.error_outline, color: colorScheme.primary, size: 28),
           const SizedBox(height: 8),
           Text(
             title,

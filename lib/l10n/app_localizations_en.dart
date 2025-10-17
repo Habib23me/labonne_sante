@@ -64,11 +64,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get categoriesTitle => 'Categories';
 
   @override
-  String get bannersErrorMessage => 'We couldn\'t load banners.';
+  String get bannersErrorMessage => 'We couldn’t load banners.';
 
   @override
-  String get categoriesErrorMessage => 'We couldn\'t load categories.';
+  String get categoriesErrorMessage => 'We couldn’t load categories.';
 
   @override
-  String get productsErrorMessage => 'We couldn\'t load products.';
+  String get productsErrorMessage => 'We couldn’t load products.';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong!';
 }

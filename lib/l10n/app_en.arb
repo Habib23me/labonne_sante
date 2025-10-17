@@ -19,6 +19,7 @@
   "categoriesTitle": "Categories",
   "bannersErrorMessage": "We couldn’t load banners.",
   "categoriesErrorMessage": "We couldn’t load categories.",
-  "productsErrorMessage": "We couldn’t load products."
+  "productsErrorMessage": "We couldn’t load products.",
+  "somethingWentWrong": "Something went wrong!"
 }
 
