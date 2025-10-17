@@ -7,12 +7,16 @@ environment:
   sdk: ^3.9.2
 
 dependencies:
+  cached_network_image: ^3.4.1
+  carousel_slider: ^5.1.1
   dio: ^5.9.0
   drift: ^2.28.2
   flutter:
     sdk: flutter
   flutter_riverpod: ^3.0.3
   freezed_annotation: ^3.1.0
+  google_fonts: ^6.3.2
+  icons_plus: ^5.0.0
   json_annotation: ^4.9.0
   path: ^1.9.1
   path_provider: ^2.1.5
@@ -33,3 +37,39 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/logo/
+    - assets/icons/
+
+  fonts:
+    - family: ITC Avant Garde Gothic
+      fonts:
+        - asset: assets/fonts/ITC Avant Garde Gothic/ITC Avant Garde Gothic Book Condensed/ITC Avant Garde Gothic Book Condensed.otf
+          weight: 300
+        - asset: assets/fonts/ITC Avant Garde Gothic/ITC Avant Garde Gothic Medium/ITC Avant Garde Gothic Medium.otf
+          weight: 500
+        - asset: assets/fonts/ITC Avant Garde Gothic/ITC Avant Garde Gothic Medium Oblique/ITC Avant Garde Gothic Medium Oblique.otf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/ITC Avant Garde Gothic/ITC Avant Garde Gothic Medium Condensed/ITC Avant Garde Gothic Medium Condensed.otf
+          weight: 500
+        - asset: assets/fonts/ITC Avant Garde Gothic/ITC Avant Garde Gothic Demi Condensed/ITC Avant Garde Gothic Demi Condensed.otf
+          weight: 600
+        - asset: assets/fonts/ITC Avant Garde Gothic/ITC Avant Garde Gothic CE Book/ITC Avant Garde Gothic CE Book.otf
+          weight: 400
+        - asset: assets/fonts/ITC Avant Garde Gothic/ITC Avant Garde Gothic CE Book Oblique/ITC Avant Garde Gothic CE Book Oblique.otf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/ITC Avant Garde Gothic/ITC Avant Garde Gothic CE Demi/ITC Avant Garde Gothic CE Demi.otf
+          weight: 600
+        - asset: assets/fonts/ITC Avant Garde Gothic/ITC Avant Garde Gothic CE Demi Oblique/ITC Avant Garde Gothic CE Demi Oblique.otf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/ITC Avant Garde Gothic/ITC Avant Garde Gothic Bold/ITC Avant Garde Gothic Bold.otf
+          weight: 700
+        - asset: assets/fonts/ITC Avant Garde Gothic/ITC Avant Garde Gothic Bold Oblique/ITC Avant Garde Gothic Bold Oblique.otf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/ITC Avant Garde Gothic/ITC Avant Garde Gothic Bold Condensed/ITC Avant Garde Gothic Bold Condensed.otf
+          weight: 700

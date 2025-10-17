@@ -8,6 +8,7 @@ abstract class CategoryModel with _$CategoryModel {
   const factory CategoryModel({
     required String id,
     required String title,
+    required String description,
     required String icon,
   }) = _CategoryModel;
 

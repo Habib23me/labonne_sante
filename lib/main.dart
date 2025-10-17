@@ -11,6 +11,31 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HomePage());
+    return MaterialApp(
+      home: HomePage(),
+      title: 'La Bonne Sante',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'ITC Avant Garde Gothic',
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          backgroundColor: Colors.transparent,
+          surfaceTintColor: Colors.transparent,
+          foregroundColor: Colors.black,
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        colorScheme: ColorScheme.fromSeed(
+          primary: Colors.black,
+          seedColor: Colors.white,
+          surface: Colors.white,
+          surfaceTint: Colors.white,
+        ),
+      ),
+    );
   }
 }

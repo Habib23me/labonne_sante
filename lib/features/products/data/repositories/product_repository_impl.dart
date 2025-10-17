@@ -20,6 +20,16 @@ class ProductRepositoryImpl implements ProductRepository {
 
   @override
   Future<List<Product>> getProducts() async {
+    // Cache-first: return local if available, then refresh in background
+    final localProducts = await localDataSource.getProducts();
+    if (localProducts.isNotEmpty) {
+      // Fire-and-forget background refresh
+      // Ignore result; UI can pick up new data on next load
+      _refreshFromNetwork();
+      return localProducts.map((e) => _fromDb(e)).toList();
+    }
+
+    // No local cache: fetch from network and cache
     try {
       final remoteProducts = await remoteDataSource.getProducts();
       await localDataSource.cacheProducts(
@@ -27,8 +37,20 @@ class ProductRepositoryImpl implements ProductRepository {
       );
       return remoteProducts.map((e) => _fromModel(e)).toList();
     } catch (e) {
-      final localProducts = await localDataSource.getProducts();
-      return localProducts.map((e) => _fromDb(e)).toList();
+      // Network failed and no cache available
+      return [];
+    }
+  }
+
+  // Background refresh method
+  Future<void> _refreshFromNetwork() async {
+    try {
+      final remoteProducts = await remoteDataSource.getProducts();
+      await localDataSource.cacheProducts(
+        products: remoteProducts.map((e) => _toDb(e)).toList(),
+      );
+    } catch (e) {
+      // Silently fail - we already have cached data
     }
   }
 
@@ -108,6 +130,11 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   Category _categoryFromModel(CategoryModel model) {
-    return Category(id: model.id, title: model.title, icon: model.icon);
+    return Category(
+      id: model.id,
+      title: model.title,
+      icon: model.icon,
+      description: model.description,
+    );
   }
 }

@@ -109,9 +109,11 @@ class MockProductLocalDataSource extends _i1.Mock
           as _i4.Future<void>);
 
   @override
-  _i4.Future<List<_i8.Product>> getProducts() =>
+  _i4.Future<List<_i8.Product>> getProducts({
+    Duration? maxAge = const Duration(hours: 1),
+  }) =>
       (super.noSuchMethod(
-            Invocation.method(#getProducts, []),
+            Invocation.method(#getProducts, [], {#maxAge: maxAge}),
             returnValue: _i4.Future<List<_i8.Product>>.value(<_i8.Product>[]),
           )
           as _i4.Future<List<_i8.Product>>);

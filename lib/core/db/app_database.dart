@@ -1,10 +1,7 @@
 import 'dart:convert';
 
 import 'package:drift/drift.dart';
-import 'package:drift/native.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as p;
-import 'dart:io';
+import 'connection/native.dart' if (dart.library.html) 'connection/web.dart';
 
 part 'app_database.g.dart';
 
@@ -43,28 +40,16 @@ class Products extends Table {
 
 @DriftDatabase(tables: [Products])
 class AppDatabase extends _$AppDatabase {
-  AppDatabase() : super(_openConnection());
+  AppDatabase() : super(constructDb());
 
   @override
   int get schemaVersion => 1;
 
   Future<void> insertProducts(List<Product> products) async {
     await batch((batch) {
-      batch.insertAll(
-        this.products,
-        products,
-        mode: InsertMode.insertOrReplace,
-      );
+      batch.insertAll(this.products, products, mode: InsertMode.insertOrReplace);
     });
   }
 
   Future<List<Product>> get allProducts => select(products).get();
-}
-
-LazyDatabase _openConnection() {
-  return LazyDatabase(() async {
-    final dbFolder = await getApplicationDocumentsDirectory();
-    final file = File(p.join(dbFolder.path, 'db.sqlite'));
-    return NativeDatabase(file);
-  });
 }

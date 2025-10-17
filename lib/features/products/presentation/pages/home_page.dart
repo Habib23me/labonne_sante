@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:labonne_sante/features/products/presentation/notifiers/product_notifier.dart';
 import 'package:labonne_sante/features/products/presentation/pages/product_detail_page.dart';
+import 'package:labonne_sante/features/products/presentation/widgets/home_carousel.dart';
+import 'package:labonne_sante/features/products/presentation/widgets/category_strip.dart';
+import 'package:labonne_sante/features/products/presentation/widgets/section_header.dart';
+import 'package:labonne_sante/features/products/presentation/widgets/product_horizontal_list.dart';
+import 'package:labonne_sante/core/widgets/glass_app_bar.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -13,95 +19,94 @@ class HomePage extends ConsumerWidget {
     final categories = ref.watch(categoriesProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('La Bonne Sante')),
-      body: ListView(
-        children: [
-          banners.when(
-            data: (data) => SizedBox(
-              height: 200,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: data.length,
-                itemBuilder: (context, index) =>
-                    Image.network(data[index].imageUrl),
-              ),
-            ),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, stack) => Text(error.toString()),
-          ),
-          categories.when(
-            data: (data) => SizedBox(
-              height: 100,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: data.length,
-                itemBuilder: (context, index) => Column(
-                  children: [
-                    // You can use an SVG loader here for the icons
-                    const Icon(Icons.category, size: 40),
-                    Text(data[index].title),
-                  ],
-                ),
-              ),
-            ),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, stack) => Text(error.toString()),
-          ),
-          const Text('New Arrivals'),
-          products.when(
-            data: (data) => SizedBox(
-              height: 200,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: data.length,
-                itemBuilder: (context, index) => GestureDetector(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductDetailPage(productId: data[index].id),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Image.network(data[index].media.first, height: 100),
-                      Text(data[index].name),
-                      Text(data[index].price.toString()),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, stack) => Text(error.toString()),
-          ),
-          const Text('Special Offers'),
-          products.when(
-            data: (data) => SizedBox(
-              height: 200,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: data.length,
-                itemBuilder: (context, index) => GestureDetector(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductDetailPage(productId: data[index].id),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Image.network(data[index].media.first, height: 100),
-                      Text(data[index].name),
-                      Text(data[index].price.toString()),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, stack) => Text(error.toString()),
+      extendBodyBehindAppBar: true,
+      appBar: GlassAppBar(
+        title: Image.asset(
+          'assets/logo/logo.png',
+          width: 170,
+          fit: BoxFit.contain,
+        ),
+        centerTitle: false,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Iconsax.search_normal_1_outline),
           ),
         ],
+      ),
+      body: RefreshIndicator(
+        onRefresh: ref.read(productsProvider.notifier).getProducts,
+        child: ListView(
+          children: [
+            const SizedBox(height: 12),
+            banners.when(
+              data: (data) => HomeCarousel(banners: data),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stack) => Text(error.toString()),
+            ),
+            const SizedBox(height: 12),
+            categories.when(
+              data: (data) => CategoryStrip(categories: data),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stack) => Text(error.toString()),
+            ),
+            const SizedBox(height: 16),
+            const SectionHeader(
+              title: 'Special Offers',
+              subtitle: "Don’t miss out on our exclusive deals.",
+              actionText: 'View All',
+            ),
+            products.when(
+              data: (data) => ProductHorizontalList(
+                products: data,
+                badgeBuilder: (_) => const Text(
+                  '25% Off',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                onProductTap: (p) => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ProductDetailPage(productId: p.id),
+                  ),
+                ),
+              ),
+              loading: () =>
+                  const ProductHorizontalList(products: [], isLoading: true),
+              error: (error, stack) => Text(error.toString()),
+            ),
+            const SizedBox(height: 16),
+            const SectionHeader(
+              title: 'Trending Now',
+              subtitle: "Discover what's new and elevate your style.",
+              actionText: 'View All',
+            ),
+            products.when(
+              data: (data) => ProductHorizontalList(
+                products: data,
+                badgeBuilder: (_) => const Text(
+                  'New',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                onProductTap: (p) => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ProductDetailPage(productId: p.id),
+                  ),
+                ),
+              ),
+              loading: () =>
+                  const ProductHorizontalList(products: [], isLoading: true),
+              error: (error, stack) => Text(error.toString()),
+            ),
+            const SizedBox(height: 24),
+          ],
+        ),
       ),
     );
   }

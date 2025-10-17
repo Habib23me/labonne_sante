@@ -34,13 +34,16 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
     // Mocked data
     return [
       const BannerModel(
-        imageUrl: 'https://via.placeholder.com/400x200?text=Banner+1',
+        imageUrl:
+            'https://www.labonnesante.ae/_vercel/image?url=https://labonnesante.sgp1.digitaloceanspaces.com/production/banner/47/IMG_5333.webp&w=1536&q=100',
       ),
       const BannerModel(
-        imageUrl: 'https://via.placeholder.com/400x200?text=Banner+2',
+        imageUrl:
+            'https://www.labonnesante.ae/_vercel/image?url=https://labonnesante.sgp1.digitaloceanspaces.com/production/banner/39/lbs-thehumble-banner.webp&w=1536&q=100',
       ),
       const BannerModel(
-        imageUrl: 'https://via.placeholder.com/400x200?text=Banner+3',
+        imageUrl:
+            'https://www.labonnesante.ae/_vercel/image?url=https://labonnesante.sgp1.digitaloceanspaces.com/production/banner/48/IMG_5334.webp&w=1536&q=100',
       ),
     ];
   }
@@ -51,23 +54,27 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
     return [
       const CategoryModel(
         id: '1',
-        title: 'Vitamins',
-        icon: 'assets/icons/vitamins.svg',
+        title: 'Skin Care',
+        description: 'Beauty',
+        icon: 'assets/icons/skin-care-icon.png',
       ),
       const CategoryModel(
         id: '2',
-        title: 'Supplements',
-        icon: 'assets/icons/supplements.svg',
+        title: 'Gum Care',
+        icon: 'assets/icons/gum-care-icon.png',
+        description: 'Oral Care',
       ),
       const CategoryModel(
         id: '3',
-        title: 'Personal Care',
-        icon: 'assets/icons/personal_care.svg',
+        title: 'Tooth Brushes',
+        description: "Oral Care",
+        icon: 'assets/icons/toothbrushes-icon.png',
       ),
       const CategoryModel(
         id: '4',
-        title: 'Baby Care',
-        icon: 'assets/icons/baby_care.svg',
+        title: 'Kid\'s Skin Care',
+        icon: 'assets/icons/kids-skin-icon.png',
+        description: 'Kids Health',
       ),
     ];
   }

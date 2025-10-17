@@ -15,3 +15,4 @@ An ecommerce app for pharmatacy products.
 *   Drift for local database
 *   Dio for networking
 *   Freezed for code generation
+*   For design and architecture view DESIGN.md
