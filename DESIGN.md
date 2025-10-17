@@ -146,19 +146,8 @@ The offline-first strategy will be implemented as follows:
 
 The app uses Flutter's gen-l10n for localization. Strings are defined in `lib/l10n/app_en.arb` and exposed via `AppLocalizations` with a `BuildContext` extension `context.l10n`.
 
-- Error placeholders and actions are localized:
-  - **Retry**: `retry`
-  - **Banners error**: `bannersErrorMessage`
-  - **Categories title**: `categoriesTitle`
-  - **Categories error**: `categoriesErrorMessage`
-  - **Products error**: `productsErrorMessage`
-
 ### 4.8. Error Handling UX
 
 Each section shows a friendly, consistent placeholder on error using `SectionErrorPlaceholder` with optional retry:
-
-- Banners: title `appTitle`, message `bannersErrorMessage`, retry refreshes `bannersProvider`.
-- Categories: title `categoriesTitle`, message `categoriesErrorMessage`, retry refreshes `categoriesProvider`.
-- Special Offers and Trending Now: title `specialOffersTitle`/`trendingNowTitle`, message `productsErrorMessage`, retry triggers `getProducts()`.
 
 If the network request fails, the app will continue to function with the cached data.
