@@ -35,7 +35,7 @@ class ProductHorizontalList extends StatelessWidget {
           return ProductCard(
             product: product,
             badge: badgeBuilder?.call(product),
-            onTap: onProductTap == null ? null : () => onProductTap!(product),
+            onTap: () => onProductTap?.call(product),
           );
         },
         separatorBuilder: (_, __) => const SizedBox(width: 16),

@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:labonne_sante/features/products/domain/entities/banner.dart'
+import 'package:labonne_sante/features/banners/domain/entities/banner.dart'
     as banner_entity;
+import 'package:labonne_sante/core/l10n/l10n_extensions.dart';
 
 class HomeCarousel extends StatefulWidget {
   final List<banner_entity.Banner> banners;
@@ -24,6 +25,7 @@ class _HomeCarouselState extends State<HomeCarousel> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = context.l10n;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -69,7 +71,7 @@ class _HomeCarouselState extends State<HomeCarousel> {
                               borderRadius: BorderRadius.circular(999),
                             ),
                             child: Text(
-                              'Shop Now',
+                              l10n.carouselCtaShopNow,
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                           ),
@@ -110,7 +112,7 @@ class _DotsIndicator extends StatelessWidget {
           decoration: BoxDecoration(
             color: isActive
                 ? colorScheme.onSurface
-                : colorScheme.onSurface.withOpacity(0.1),
+                : colorScheme.onSurface.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(24),
           ),
         );

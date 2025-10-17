@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:labonne_sante/core/constants/colors.dart';
-import 'package:labonne_sante/features/products/domain/entities/category.dart'
+import 'package:labonne_sante/features/categories/domain/entities/category.dart'
     as category_entity;
 
 class CategoryStrip extends StatelessWidget {
@@ -48,8 +48,8 @@ class CategoryStrip extends StatelessWidget {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
-                              Colors.white.withOpacity(0.20),
-                              Colors.white.withOpacity(0.10),
+                              Colors.white.withValues(alpha: 0.20),
+                              Colors.white.withValues(alpha: 0.10),
                               Color.fromARGB(255, 223, 220, 220),
                             ],
                             stops: const [0.0, 0.5, 1.0],
@@ -69,9 +69,10 @@ class CategoryStrip extends StatelessWidget {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: textTheme.titleSmall?.copyWith(
-                                color: colorScheme.onSurface.withOpacity(0.82),
+                                color: colorScheme.onSurface.withValues(
+                                  alpha: 0.82,
+                                ),
                                 fontWeight: FontWeight.w500,
-
                                 height: 1.2,
                               ),
                             ),
@@ -116,8 +117,8 @@ class CategoryStrip extends StatelessWidget {
                             end: Alignment.bottomRight,
                             colors: [
                               Colors.transparent,
-                              Colors.white.withOpacity(0.05),
-                              Colors.white.withOpacity(0.10),
+                              Colors.white.withValues(alpha: 0.05),
+                              Colors.white.withValues(alpha: 0.10),
                             ],
                           ),
                         ),

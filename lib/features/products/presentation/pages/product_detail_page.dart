@@ -5,6 +5,7 @@ import 'package:labonne_sante/features/products/presentation/widgets/pdp_image_c
 import 'package:labonne_sante/features/products/presentation/widgets/pdp_rating_row.dart';
 import 'package:labonne_sante/features/products/presentation/widgets/pdp_expandable_section.dart';
 import 'package:labonne_sante/core/widgets/glass_app_bar.dart';
+import 'package:labonne_sante/core/l10n/l10n_extensions.dart';
 
 class ProductDetailPage extends ConsumerWidget {
   final String productId;
@@ -41,7 +42,7 @@ class ProductDetailPage extends ConsumerWidget {
               color: colorScheme.surface,
               border: Border(
                 top: BorderSide(
-                  color: colorScheme.outlineVariant.withOpacity(0.12),
+                  color: colorScheme.outlineVariant.withValues(alpha: 0.12),
                 ),
               ),
             ),
@@ -57,7 +58,7 @@ class ProductDetailPage extends ConsumerWidget {
                         style: textTheme.titleMedium,
                       ),
                       Text(
-                        'Shop Now, Pay Later',
+                        context.l10n.pdpShopNowPayLater,
                         style: textTheme.labelSmall?.copyWith(
                           color: colorScheme.onSurfaceVariant,
                         ),
@@ -74,7 +75,7 @@ class ProductDetailPage extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(0),
                     ),
                   ),
-                  child: const Text('ADD TO CART'),
+                  child: Text(context.l10n.pdpAddToCart),
                 ),
               ],
             ),
@@ -111,7 +112,7 @@ class ProductDetailPage extends ConsumerWidget {
             Container(height: 6, color: const Color(0xFFF7F8F9)),
             // Description section
             PdpExpandableSection(
-              title: 'Description',
+              title: context.l10n.pdpDescription,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -126,9 +127,9 @@ class ProductDetailPage extends ConsumerWidget {
             ),
             // Size & Fit
             PdpExpandableSection(
-              title: 'Size & Fit',
+              title: context.l10n.pdpSizeAndFit,
               child: Text(
-                'Oversized fit\nMidi length',
+                context.l10n.pdpSizeAndFitDetails,
                 style: textTheme.bodySmall?.copyWith(
                   color: colorScheme.onSurfaceVariant,
                 ),
@@ -136,9 +137,9 @@ class ProductDetailPage extends ConsumerWidget {
             ),
             // Materials & Care
             PdpExpandableSection(
-              title: 'Materials & Care',
+              title: context.l10n.pdpMaterialsAndCare,
               child: Text(
-                '100% Cotton',
+                context.l10n.pdpMaterialsAndCareDetails,
                 style: textTheme.bodySmall?.copyWith(
                   color: colorScheme.onSurfaceVariant,
                 ),

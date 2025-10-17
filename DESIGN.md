@@ -143,15 +143,3 @@ The offline-first strategy will be implemented as follows:
 5.  **UI Refresh:** The UI will automatically refresh to display the latest data from the database.
 
 If the network request fails, the app will continue to function with the cached data.
-
-## 5. Summary of the Design
-
-The "La Bonne Sante" app will be a Flutter e-commerce application with an offline-first architecture. It will use a simplified DDD project structure, with Riverpod for state management, Drift for local persistence, and Dio for networking. The app will feature a home page with product listings and a product detail page.
-
-## 6. References
-
-*   [Flutter Offline-First Architecture with Riverpod and Drift](https://www.google.com/search?q=Flutter+offline-first+architecture+with+Riverpod+and+Drift)
-*   [Flutter E-commerce App Architecture with Riverpod Providers](https://www.google.com/search?q=Flutter+e-commerce+app+architecture+with+Riverpod+providers)
-*   [Drift (Moor) Schema Design for Caching Products](https://www.google.com/search?q=Drift+(Moor)+schema+design+for+caching+products+with+categories+and+images+in+Flutter)
-
-*   [Flutter Simple Domain-Driven Design (DDD) Project Structure](https://www.google.com/search?q=Flutter+simple+Domain-Driven+Design+(DDD)+project+structure)

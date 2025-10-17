@@ -28,7 +28,6 @@ class ProductCard extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   border: Border.all(color: AppColors.cardBorder, width: 1),
-                  borderRadius: BorderRadius.circular(12),
                 ),
                 clipBehavior: Clip.hardEdge,
                 child: ClipRRect(
@@ -45,7 +44,7 @@ class ProductCard extends StatelessWidget {
                         top: 8,
                         child: DecoratedBox(
                           decoration: BoxDecoration(
-                            color: colorScheme.background,
+                            color: colorScheme.surfaceContainerLowest,
                             borderRadius: BorderRadius.circular(999),
                           ),
                           child: const Padding(
@@ -61,7 +60,6 @@ class ProductCard extends StatelessWidget {
                           child: DecoratedBox(
                             decoration: BoxDecoration(
                               color: colorScheme.primary,
-                              // borderRadius: BorderRadius.circular(999),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
@@ -92,6 +90,8 @@ class ProductCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
+
+            ///Hardcoding currency for now for the sake of simplicity
             Text(
               '${product.price.toStringAsFixed(0)} AED',
               style: textTheme.titleMedium,

@@ -35,7 +35,7 @@ class GlassAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final Color dividerColor = Theme.of(
       context,
-    ).colorScheme.outlineVariant.withOpacity(0.12);
+    ).colorScheme.outlineVariant.withValues(alpha: 0.12);
 
     return AppBar(
       elevation: 0,
@@ -59,8 +59,8 @@ class GlassAppBar extends StatelessWidget implements PreferredSizeWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  tintColor.withOpacity(0.9),
-                  tintColor.withOpacity(0.7),
+                  tintColor.withValues(alpha: 0.9),
+                  tintColor.withValues(alpha: 0.7),
                 ],
               ),
               border: Border(bottom: BorderSide(color: dividerColor, width: 1)),

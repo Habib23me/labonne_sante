@@ -6,14 +6,14 @@
 import 'dart:async' as _i4;
 
 import 'package:labonne_sante/core/db/app_database.dart' as _i8;
+import 'package:labonne_sante/features/banners/data/models/banner_model.dart'
+    as _i5;
+import 'package:labonne_sante/features/categories/data/models/category_model.dart'
+    as _i6;
 import 'package:labonne_sante/features/products/data/datasources/product_local_data_source.dart'
     as _i7;
 import 'package:labonne_sante/features/products/data/datasources/product_remote_data_source.dart'
     as _i3;
-import 'package:labonne_sante/features/products/data/models/banner_model.dart'
-    as _i5;
-import 'package:labonne_sante/features/products/data/models/category_model.dart'
-    as _i6;
 import 'package:labonne_sante/features/products/data/models/product_model.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -109,11 +109,9 @@ class MockProductLocalDataSource extends _i1.Mock
           as _i4.Future<void>);
 
   @override
-  _i4.Future<List<_i8.Product>> getProducts({
-    Duration? maxAge = const Duration(hours: 1),
-  }) =>
+  _i4.Future<List<_i8.Product>> getProducts() =>
       (super.noSuchMethod(
-            Invocation.method(#getProducts, [], {#maxAge: maxAge}),
+            Invocation.method(#getProducts, []),
             returnValue: _i4.Future<List<_i8.Product>>.value(<_i8.Product>[]),
           )
           as _i4.Future<List<_i8.Product>>);

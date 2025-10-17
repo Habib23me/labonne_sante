@@ -1,0 +1,24 @@
+{
+  "appTitle": "La Bonne Sante",
+  "specialOffersTitle": "Special Offers",
+  "specialOffersSubtitle": "Don’t miss out on our exclusive deals.",
+  "viewAll": "View All",
+  "trendingNowTitle": "Trending Now",
+  "trendingNowSubtitle": "Discover what's new and elevate your style.",
+  "badgeDiscount25": "25% Off",
+  "badgeNew": "New",
+  "carouselCtaShopNow": "Shop Now",
+  "pdpShopNowPayLater": "Shop Now, Pay Later",
+  "pdpAddToCart": "ADD TO CART",
+  "pdpDescription": "Description",
+  "pdpSizeAndFit": "Size & Fit",
+  "pdpSizeAndFitDetails": "Oversized fit\nMidi length",
+  "pdpMaterialsAndCare": "Materials & Care",
+  "pdpMaterialsAndCareDetails": "100% Cotton",
+  "retry": "Retry",
+  "categoriesTitle": "Categories",
+  "bannersErrorMessage": "We couldn’t load banners.",
+  "categoriesErrorMessage": "We couldn’t load categories.",
+  "productsErrorMessage": "We couldn’t load products."
+}
+

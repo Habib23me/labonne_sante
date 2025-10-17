@@ -7,7 +7,9 @@ class ProductCardSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final baseColor = colorScheme.surfaceVariant.withOpacity(0.4);
+    final baseColor = colorScheme.surfaceContainerHighest.withValues(
+      alpha: 0.4,
+    );
 
     return SizedBox(
       width: 249,

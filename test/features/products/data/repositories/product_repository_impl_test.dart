@@ -51,6 +51,10 @@ void main() {
       'should return remote data when the call to remote data source is successful',
       () async {
         // arrange
+        // cache-first path calls local first; return empty to force remote fetch
+        mockito
+            .when(mockLocalDataSource.getProducts())
+            .thenAnswer((_) async => []);
         mockito
             .when(mockRemoteDataSource.getProducts())
             .thenAnswer((_) async => tProductModelList);
@@ -66,6 +70,10 @@ void main() {
       'should cache the data locally when the call to remote data source is successful',
       () async {
         // arrange
+        // cache-first path calls local first; return empty to force remote fetch
+        mockito
+            .when(mockLocalDataSource.getProducts())
+            .thenAnswer((_) async => []);
         mockito
             .when(mockRemoteDataSource.getProducts())
             .thenAnswer((_) async => tProductModelList);

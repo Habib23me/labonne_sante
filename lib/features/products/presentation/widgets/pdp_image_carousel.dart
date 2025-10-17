@@ -56,7 +56,7 @@ class _PdpImageCarouselState extends State<PdpImageCarousel> {
               decoration: BoxDecoration(
                 color: isActive
                     ? colorScheme.onSurface
-                    : colorScheme.onSurface.withOpacity(0.1),
+                    : colorScheme.onSurface.withValues(alpha: .1),
                 borderRadius: BorderRadius.circular(24),
               ),
             );

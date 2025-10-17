@@ -1,10 +1,10 @@
 import 'package:labonne_sante/features/products/data/datasources/product_local_data_source.dart';
 import 'package:labonne_sante/features/products/data/datasources/product_remote_data_source.dart';
-import 'package:labonne_sante/features/products/data/models/banner_model.dart';
-import 'package:labonne_sante/features/products/data/models/category_model.dart';
+import 'package:labonne_sante/features/banners/data/models/banner_model.dart';
+import 'package:labonne_sante/features/categories/data/models/category_model.dart';
 import 'package:labonne_sante/features/products/data/models/product_model.dart';
-import 'package:labonne_sante/features/products/domain/entities/banner.dart';
-import 'package:labonne_sante/features/products/domain/entities/category.dart';
+import 'package:labonne_sante/features/banners/domain/entities/banner.dart';
+import 'package:labonne_sante/features/categories/domain/entities/category.dart';
 import 'package:labonne_sante/features/products/domain/entities/product.dart';
 import 'package:labonne_sante/features/products/domain/repositories/product_repository.dart';
 import 'package:labonne_sante/core/db/app_database.dart' as db;
@@ -18,18 +18,19 @@ class ProductRepositoryImpl implements ProductRepository {
     required this.localDataSource,
   });
 
+  // Cache-first: return local if available, then refresh in background
+  // Fire-and-forget background refresh and Ignore result; UI can pick up new data on next load
+  // if there is no local cache: fetch from network and cache
+  // if network failed and no cache available: return empty list
+
   @override
   Future<List<Product>> getProducts() async {
-    // Cache-first: return local if available, then refresh in background
     final localProducts = await localDataSource.getProducts();
     if (localProducts.isNotEmpty) {
-      // Fire-and-forget background refresh
-      // Ignore result; UI can pick up new data on next load
       _refreshFromNetwork();
       return localProducts.map((e) => _fromDb(e)).toList();
     }
 
-    // No local cache: fetch from network and cache
     try {
       final remoteProducts = await remoteDataSource.getProducts();
       await localDataSource.cacheProducts(
@@ -37,7 +38,6 @@ class ProductRepositoryImpl implements ProductRepository {
       );
       return remoteProducts.map((e) => _fromModel(e)).toList();
     } catch (e) {
-      // Network failed and no cache available
       return [];
     }
   }
@@ -60,18 +60,6 @@ class ProductRepositoryImpl implements ProductRepository {
     // A more robust implementation would check local first.
     final remoteProduct = await remoteDataSource.getProductById(id);
     return _fromModel(remoteProduct);
-  }
-
-  @override
-  Future<List<Banner>> getBanners() async {
-    final remoteBanners = await remoteDataSource.getBanners();
-    return remoteBanners.map((e) => _bannerFromModel(e)).toList();
-  }
-
-  @override
-  Future<List<Category>> getCategories() async {
-    final remoteCategories = await remoteDataSource.getCategories();
-    return remoteCategories.map((e) => _categoryFromModel(e)).toList();
   }
 
   Product _fromModel(ProductModel model) {
@@ -122,19 +110,6 @@ class ProductRepositoryImpl implements ProductRepository {
       rating: dbProduct.rating,
       reviewsCount: dbProduct.reviewsCount,
       media: dbProduct.media,
-    );
-  }
-
-  Banner _bannerFromModel(BannerModel model) {
-    return Banner(imageUrl: model.imageUrl);
-  }
-
-  Category _categoryFromModel(CategoryModel model) {
-    return Category(
-      id: model.id,
-      title: model.title,
-      icon: model.icon,
-      description: model.description,
     );
   }
 }

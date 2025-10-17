@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:labonne_sante/features/products/presentation/pages/home_page.dart';
+import 'package:labonne_sante/core/l10n/l10n_extensions.dart';
+import 'package:labonne_sante/l10n/app_localizations.dart';
 
 void main() {
   runApp(const ProviderScope(child: MainApp()));
@@ -13,8 +15,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomePage(),
-      title: 'La Bonne Sante',
+      onGenerateTitle: (context) => context.l10n.appTitle,
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         fontFamily: 'ITC Avant Garde Gothic',
         appBarTheme: const AppBarTheme(
